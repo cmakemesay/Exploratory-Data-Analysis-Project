@@ -22,7 +22,6 @@ table <- data.frame(years = years, total = total)
 #Plotting graph
 png('plot5.png')
 plot(table$years,table$total,type='l', main='Total Motor Vehicle Related PM2.5 
-     Emissions by Year in Baltimore', xlab='Year',ylab='Total Emissions (tons)')
+     Emissions by Year in Baltimore', xlab='Year',ylab='Total Emissions (tons)',
+     ylim=c(0,max(table$total)*1.05))
 dev.off()
-
-

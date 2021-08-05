@@ -10,5 +10,6 @@ table <- data.frame(years = years, total = total)
 #Plotting graph
 png('plot1.png')
 plot(table$years,table$total,type='l', main='Total PM2.5 Emissions by Year in the
-     USA', xlab='Year',ylab='Total Emissions (tons)')
+     USA', xlab='Year',ylab='Total Emissions (tons)',
+     ylim=c(0,max(table$total)*1.05))
 dev.off()
