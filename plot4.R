@@ -1,0 +1,25 @@
+#Load the files
+NEI <- readRDS("summarySCC_PM25.rds")
+SCC <- readRDS("Source_Classification_Code.rds")
+
+#Creating table with total values from 1999,2002,2005 and 2008 for coal
+#combustion related sources
+#Comparing to EI.Sector column using the SCC code
+sector <- data.frame(SCC = SCC$SCC,sector=SCC$EI.Sector)
+coal <- sector[grep('[Cc]oal',sector$sector),]
+
+#Filter by columns that contain the word coal
+NEI <- subset(NEI,NEI$SCC %in% coal$SCC)
+
+#Summarizing by year
+total <- tapply(NEI$Emissions,NEI$year,sum)
+years <- names(total)
+table <- data.frame(years = years, total = total)
+
+#Plotting graph
+png('plot4.png')
+plot(table$years,table$total,type='l', main='Total Coal Related PM2.5 Emissions 
+     by Year in the USA', xlab='Year',ylab='Total Emissions (tons)')
+dev.off()
+
+
